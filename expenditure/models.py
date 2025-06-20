@@ -15,7 +15,8 @@ class Category(models.Model):
 class Budget(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    amount_planned_to_spend = models.DecimalField(max_digits=10, decimal_places=2)
+    amount_planned_to_spend = models.FloatField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.user.username} - {self.category.name}"
@@ -33,7 +34,7 @@ class Transaction(models.Model):
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    amount = models.FloatField()
     payment_method = models.CharField(max_length=10, choices=PAYMENT_METHOD_CHOICES)
     transaction_date = models.DateTimeField()
     type = models.CharField(max_length=10, choices=TYPE_CHOICES)
@@ -49,7 +50,7 @@ class Transaction(models.Model):
 class Expenditure(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    amount = models.FloatField()
     date = models.DateTimeField()
     budget = models.ForeignKey(Budget, on_delete=models.CASCADE)
 
