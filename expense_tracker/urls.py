@@ -42,7 +42,7 @@ urlpatterns = [
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('api/', include('users.urls')),
-    path('api/', include('expebnditure.urls')),
+    path('api/', include('expenditure.urls')),
     path('api/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 
 
